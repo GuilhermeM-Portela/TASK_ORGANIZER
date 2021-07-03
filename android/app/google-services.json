@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "693362835393",
+    "project_id": "taskmanager-3e91e",
+    "storage_bucket": "taskmanager-3e91e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:693362835393:android:e0cbf6eb902f59b083f940",
+        "android_client_info": {
+          "package_name": "br.guilhermeportela.taskmanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "693362835393-stc1d1lh1qdo6jspu6ph11ve0ple6ika.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJYnMt79M5P4GQahs1uaCd2PUnuHm57OE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "693362835393-stc1d1lh1qdo6jspu6ph11ve0ple6ika.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
