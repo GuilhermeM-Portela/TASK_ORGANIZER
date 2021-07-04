@@ -1,8 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lit_firebase_auth/lit_firebase_auth.dart';
+import 'package:taskmanager/home/ui/page_workspace.dart';
 
 import 'auth/auth.dart';
-import 'home.dart';
 
 
 class SplashScreen extends StatelessWidget {
@@ -14,15 +15,20 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = context.watchSignedInUser();
-    user.map(
-      (value) {
-        _navigateToHomeScreen(context);
+    // final user = context.getSignedInUser();
+    final litUser = context.watchSignedInUser();
+    litUser.map(
+
+          (value) {
+        // _navigateToHomeScreen(context);
+        _navigateToWorkspacePage(context);
       },
       empty: (_) {
         _navigateToAuthScreen(context);
       },
-      initializing: (_) {},
+
+      initializing: (_) {
+      },
     );
 
     return const Scaffold(
@@ -34,13 +40,13 @@ class SplashScreen extends StatelessWidget {
 
   void _navigateToAuthScreen(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) => Navigator.of(context).pushReplacement(AuthScreen.route),
+          (_) => Navigator.of(context).pushReplacement(AuthScreen.route),
     );
   }
 
-  void _navigateToHomeScreen(BuildContext context) {
+  void _navigateToWorkspacePage(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) => Navigator.of(context).pushReplacement(HomeScreen.route),
+          (_) => Navigator.of(context).pushReplacement(WorkspacePage.route),
     );
   }
 }

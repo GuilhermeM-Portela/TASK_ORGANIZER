@@ -1,12 +1,10 @@
 import 'dart:async';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lit_firebase_auth/lit_firebase_auth.dart';
-import 'package:taskmanager/screens/home.dart';
+import 'package:taskmanager/home/ui/page_workspace.dart';
 import 'package:taskmanager/screens/splash.dart';
 import 'config/palette.dart';
 
@@ -19,8 +17,6 @@ Future<Null> main() async {
 }
 
 
-
-
 class TaskManagerApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -28,7 +24,7 @@ class TaskManagerApp extends StatelessWidget {
       authProviders: const AuthProviders(
         emailAndPassword: true,
         google: true,
-        apple: true,
+        github: true,
         twitter: true,
       ),
       child: MaterialApp(
@@ -44,12 +40,12 @@ class TaskManagerApp extends StatelessWidget {
           ),
         ),
 
-        home: const LitAuthState(
-          authenticated: HomeScreen(),
+        home:  LitAuthState(
+          authenticated: WorkspacePage(),
           unauthenticated: SplashScreen(),
         ),
         //home: const SplashScreen(),
-      ),
+     ),
     );
   }
 }

@@ -82,7 +82,7 @@ class SignIn extends StatelessWidget {
                         ),
                         ProviderButton(
                           context: context,
-                          signInType: "apple",
+                          signInType: "GitHub",
                         ),
                         ProviderButton(
                           context: context,

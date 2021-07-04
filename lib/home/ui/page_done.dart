@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:taskmanager/home/model/element.dart';
-import 'package:taskmanager/home/ui/page_detail.dart';
+import 'package:taskmanager/home/ui/page_detail_list.dart';
 
 
 class DonePage extends StatefulWidget {

@@ -3,10 +3,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:lit_firebase_auth/lit_firebase_auth.dart';
 import 'package:taskmanager/config/palette.dart';
+import 'package:taskmanager/home/ui/page_task.dart';
+import 'package:taskmanager/home/ui/page_workspace.dart';
 import 'package:taskmanager/screens/auth/widgets/register.dart';
 import 'package:taskmanager/screens/auth/widgets/sign_in.dart';
-
-import '../home.dart';
 import 'widgets/background_painter.dart';
 
 class AuthScreen extends StatefulWidget {
@@ -47,12 +47,12 @@ class _AuthScreenState extends State<AuthScreen>
           backgroundColor: Palette.darkBlue,
           icon: Icon(
             Icons.error_outline,
-            color: Colors.deepOrange,
+            color: Colors.red,
             size: 32,
           ),
         ),
         onAuthSuccess: () {
-          Navigator.of(context).pushReplacement(HomeScreen.route);
+          Navigator.of(context).pushReplacement(WorkspacePage.route);
         },
         child: Stack(
           children: [

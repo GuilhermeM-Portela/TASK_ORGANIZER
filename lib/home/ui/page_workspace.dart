@@ -5,22 +5,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:taskmanager/home/model/element.dart';
-import 'package:taskmanager/home/ui/page_detail_list.dart';
-import 'page_add_list.dart';
+import 'package:taskmanager/home/ui/page_add_workspace.dart';
+import 'package:taskmanager/home/ui/page_detail_workspace.dart';
+import 'package:taskmanager/screens/auth/auth.dart';
+import 'package:lit_firebase_auth/lit_firebase_auth.dart';
 
-class TaskPage extends StatefulWidget {
-  TaskPage({Key key,}) : super(key: key);
-  static MaterialPageRoute get route =>
-      MaterialPageRoute(
-        builder: (context) => TaskPage(),
+class WorkspacePage extends StatefulWidget {
+  WorkspacePage({Key key}) : super(key: key);
+  static MaterialPageRoute get route => MaterialPageRoute(
+        builder: (context) => WorkspacePage(),
       );
 
   final user = FirebaseAuth.instance.currentUser;
   @override
-  State<StatefulWidget> createState() => _TaskPageState();
+  State<StatefulWidget> createState() => _WorkspacePageState();
 }
 
-class _TaskPageState extends State<TaskPage>
+class _WorkspacePageState extends State<WorkspacePage>
     with SingleTickerProviderStateMixin {
   int index = 1;
 
@@ -29,6 +30,13 @@ class _TaskPageState extends State<TaskPage>
     return Scaffold(
       body: ListView(
         children: <Widget>[
+          RaisedButton(
+            onPressed: () {
+              context.signOut();
+              Navigator.of(context).push(AuthScreen.route);
+            },
+            child: const Text('Sign out'),
+          ),
           _getToolbar(context),
           new Column(
             children: <Widget>[
@@ -51,15 +59,15 @@ class _TaskPageState extends State<TaskPage>
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Text(
-                              'Task',
+                              'Workspace',
                               style: new TextStyle(
                                   fontSize: 30.0, fontWeight: FontWeight.bold),
                             ),
-                            Text(
-                              'Manager',
-                              style: new TextStyle(
-                                  fontSize: 28.0, color: Colors.grey),
-                            )
+                            // Text(
+                            //   'Manager',
+                            //   style: new TextStyle(
+                            //       fontSize: 28.0, color: Colors.grey),
+                            // )
                           ],
                         )),
                     Expanded(
@@ -84,13 +92,13 @@ class _TaskPageState extends State<TaskPage>
                           borderRadius: BorderRadius.all(Radius.circular(7.0))),
                       child: new IconButton(
                         icon: new Icon(Icons.add),
-                        onPressed: _addTaskPressed,
+                        onPressed: _addWorkspacePressed,
                         iconSize: 30.0,
                       ),
                     ),
                     Padding(
                       padding: EdgeInsets.only(top: 10.0),
-                      child: Text('Add List',
+                      child: Text('Add Workspace',
                           style: TextStyle(color: Colors.black45)),
                     ),
                   ],
@@ -117,8 +125,8 @@ class _TaskPageState extends State<TaskPage>
                       if (!snapshot.hasData)
                         return new Center(
                             child: CircularProgressIndicator(
-                          backgroundColor: Colors.blue,
-                        ));
+                              backgroundColor: Colors.blue,
+                            ));
                       return new ListView(
                         physics: const BouncingScrollPhysics(),
                         padding: EdgeInsets.only(left: 40.0, right: 40.0),
@@ -133,6 +141,7 @@ class _TaskPageState extends State<TaskPage>
       ),
     );
   }
+
 
   @override
   void dispose() {
@@ -178,45 +187,45 @@ class _TaskPageState extends State<TaskPage>
           onTap: () {
             Navigator.of(context).push(
               new PageRouteBuilder(
-                pageBuilder: (_, __, ___) => new DetailPage(
-                      user: widget.user,
-                      i: index,
-                      currentList: userMap,
-                      color: cardColor.elementAt(index),
-                    ),
+                pageBuilder: (_, __, ___) => new WorkspaceDetailPage(
+                  user: widget.user,
+                  i: index,
+                  currentList: userMap,
+                  color: cardColor.elementAt(index),
+                ),
                 transitionsBuilder:
                     (context, animation, secondaryAnimation, child) =>
-                        new ScaleTransition(
-                          scale: new Tween<double>(
-                            begin: 1.5,
-                            end: 1.0,
-                          ).animate(
-                            CurvedAnimation(
-                              parent: animation,
-                              curve: Interval(
-                                0.50,
-                                1.00,
-                                curve: Curves.linear,
-                              ),
-                            ),
-                          ),
-                          child: ScaleTransition(
-                            scale: Tween<double>(
-                              begin: 0.0,
-                              end: 1.0,
-                            ).animate(
-                              CurvedAnimation(
-                                parent: animation,
-                                curve: Interval(
-                                  0.00,
-                                  0.50,
-                                  curve: Curves.linear,
-                                ),
-                              ),
-                            ),
-                            child: child,
-                          ),
+                new ScaleTransition(
+                  scale: new Tween<double>(
+                    begin: 1.5,
+                    end: 1.0,
+                  ).animate(
+                    CurvedAnimation(
+                      parent: animation,
+                      curve: Interval(
+                        0.50,
+                        1.00,
+                        curve: Curves.linear,
+                      ),
+                    ),
+                  ),
+                  child: ScaleTransition(
+                    scale: Tween<double>(
+                      begin: 0.0,
+                      end: 1.0,
+                    ).animate(
+                      CurvedAnimation(
+                        parent: animation,
+                        curve: Interval(
+                          0.00,
+                          0.50,
+                          curve: Curves.linear,
                         ),
+                      ),
+                    ),
+                    child: child,
+                  ),
+                ),
               ),
             );
           },
@@ -260,30 +269,30 @@ class _TaskPageState extends State<TaskPage>
                     ),
                     Padding(
                       padding:
-                          EdgeInsets.only(top: 30.0, left: 15.0, right: 5.0),
+                      EdgeInsets.only(top: 30.0, left: 15.0, right: 5.0),
                       child: Column(
                         children: <Widget>[
                           SizedBox(
                             height: 220.0,
                             child: ListView.builder(
-                                //physics: const NeverScrollableScrollPhysics(),
+                              //physics: const NeverScrollableScrollPhysics(),
                                 itemCount:
-                                    userMap.values.elementAt(index).length,
+                                userMap.values.elementAt(index).length,
                                 itemBuilder: (BuildContext ctxt, int i) {
                                   return Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: <Widget>[
                                       Icon(
                                         userMap.values
-                                                .elementAt(index)
-                                                .elementAt(i)
-                                                .isDone
+                                            .elementAt(index)
+                                            .elementAt(i)
+                                            .isDone
                                             ? FontAwesomeIcons.checkCircle
                                             : FontAwesomeIcons.circle,
                                         color: userMap.values
-                                                .elementAt(index)
-                                                .elementAt(i)
-                                                .isDone
+                                            .elementAt(index)
+                                            .elementAt(i)
+                                            .isDone
                                             ? Colors.white70
                                             : Colors.white,
                                         size: 14.0,
@@ -298,19 +307,19 @@ class _TaskPageState extends State<TaskPage>
                                               .elementAt(i)
                                               .name,
                                           style: userMap.values
-                                                  .elementAt(index)
-                                                  .elementAt(i)
-                                                  .isDone
+                                              .elementAt(index)
+                                              .elementAt(i)
+                                              .isDone
                                               ? TextStyle(
-                                                  decoration: TextDecoration
-                                                      .lineThrough,
-                                                  color: Colors.white70,
-                                                  fontSize: 17.0,
-                                                )
+                                            decoration: TextDecoration
+                                                .lineThrough,
+                                            color: Colors.white70,
+                                            fontSize: 17.0,
+                                          )
                                               : TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 17.0,
-                                                ),
+                                            color: Colors.white,
+                                            fontSize: 17.0,
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -340,44 +349,44 @@ class _TaskPageState extends State<TaskPage>
     ]);
   }
 
-  void _addTaskPressed() async {
+  void _addWorkspacePressed() async {
     Navigator.of(context).push(
       new PageRouteBuilder(
-        pageBuilder: (_, __, ___) => new NewTaskPage(
-              user: widget.user,
-            ),
+        pageBuilder: (_, __, ___) => new NewWorkspacePage(
+          user: widget.user,
+        ),
         transitionsBuilder: (context, animation, secondaryAnimation, child) =>
-            new ScaleTransition(
-              scale: new Tween<double>(
-                begin: 1.5,
-                end: 1.0,
-              ).animate(
-                CurvedAnimation(
-                  parent: animation,
-                  curve: Interval(
-                    0.50,
-                    1.00,
-                    curve: Curves.linear,
-                  ),
-                ),
-              ),
-              child: ScaleTransition(
-                scale: Tween<double>(
-                  begin: 0.0,
-                  end: 1.0,
-                ).animate(
-                  CurvedAnimation(
-                    parent: animation,
-                    curve: Interval(
-                      0.00,
-                      0.50,
-                      curve: Curves.linear,
-                    ),
-                  ),
-                ),
-                child: child,
+        new ScaleTransition(
+          scale: new Tween<double>(
+            begin: 1.5,
+            end: 1.0,
+          ).animate(
+            CurvedAnimation(
+              parent: animation,
+              curve: Interval(
+                0.50,
+                1.00,
+                curve: Curves.linear,
               ),
             ),
+          ),
+          child: ScaleTransition(
+            scale: Tween<double>(
+              begin: 0.0,
+              end: 1.0,
+            ).animate(
+              CurvedAnimation(
+                parent: animation,
+                curve: Interval(
+                  0.00,
+                  0.50,
+                  curve: Curves.linear,
+                ),
+              ),
+            ),
+            child: child,
+          ),
+        ),
       ),
     );
     //Navigator.of(context).pushNamed('/new');

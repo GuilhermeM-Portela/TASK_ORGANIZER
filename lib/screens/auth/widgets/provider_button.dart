@@ -49,7 +49,7 @@ class _ProviderButtonState extends State<ProviderButton> {
             ),
             child: Transform.translate(
               offset: const Offset(-1, 0),
-              child: LitAuthIcon.appleBlack(
+              child: LitAuthIcon.github(
                 size: const Size(30, 30),
               ),
             ),
