@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lit_firebase_auth/lit_firebase_auth.dart';
-import 'package:taskmanager/home/ui/page_workspace.dart';
+import 'package:taskmanager/screens/home/ui/page_workspace.dart';
 import 'package:taskmanager/screens/splash.dart';
 import 'config/palette.dart';
 
@@ -23,9 +23,9 @@ class TaskManagerApp extends StatelessWidget {
     return LitAuthInit(
       authProviders: const AuthProviders(
         emailAndPassword: true,
-        google: true,
-        github: true,
-        twitter: true,
+        // google: true,
+        // github: true,
+        // twitter: true,
       ),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lit_firebase_auth/lit_firebase_auth.dart';
-import 'package:taskmanager/screens/auth/widgets/provider_button.dart';
 import 'package:taskmanager/screens/auth/widgets/sign_in_up_bar.dart';
 
 
@@ -64,32 +63,32 @@ class SignIn extends StatelessWidget {
                 alignment: Alignment.bottomCenter,
                 child: Column(
                   children: [
-                    const Text(
-                      "or sign in with",
-                      style: TextStyle(
-                        color: Colors.black54,
-                      ),
-                    ),
+                    // const Text(
+                    //   "or sign in with",
+                    //   style: TextStyle(
+                    //     color: Colors.black54,
+                    //   ),
+                    // ),
                     const SizedBox(
                       height: 24.0,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        ProviderButton(
-                          context: context,
-                          signInType: "google",
-                        ),
-                        ProviderButton(
-                          context: context,
-                          signInType: "GitHub",
-                        ),
-                        ProviderButton(
-                          context: context,
-                          signInType: "twitter",
-                        ),
-                      ],
-                    ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    //   children: [
+                    //     ProviderButton(
+                    //       context: context,
+                    //       signInType: "google",
+                    //     ),
+                    //     ProviderButton(
+                    //       context: context,
+                    //       signInType: "GitHub",
+                    //     ),
+                    //     ProviderButton(
+                    //       context: context,
+                    //       signInType: "twitter",
+                    //     ),
+                    //   ],
+                    // ),
                     const Spacer(),
                     InkWell(
                         splashColor: Colors.white,

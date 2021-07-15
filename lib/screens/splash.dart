@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lit_firebase_auth/lit_firebase_auth.dart';
-import 'package:taskmanager/home/ui/page_workspace.dart';
 
 import 'auth/auth.dart';
+import 'home/ui/page_workspace.dart';
 
 
 class SplashScreen extends StatelessWidget {
